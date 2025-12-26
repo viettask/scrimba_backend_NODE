@@ -29,12 +29,13 @@ import http from 'node:http'
 const PORT=8000
 
 const server = http.createServer((req, res) =>{
-    //Set the status code 200 OK
-    res.statusCode = 200
-
-    //Set the content type to "text/html"
-    res.setHeader('Content-Type', 'text/html')
-
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET')
+    // //Set the status code 200 OK
+    // res.statusCode = 200
+    // //Set the content type to "text/html"
+    // res.setHeader('Content-Type', 'text/html')
+    res.writeHead(200, {'Content-Type', 'text/html'})
     //send the HTML response
     res.end(`<html><h1>The server is working</h1></html>`)
 })
