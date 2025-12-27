@@ -9,3 +9,6 @@ In package.json:
 2) res.writeHead()
 Basically,  write head is another method on response object 
 use it to set the status code and headers such as content type
+
+3) We need to be OS agnostic!
+

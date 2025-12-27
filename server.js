@@ -25,19 +25,53 @@ Challenge 2:
 */
 
 import http from 'node:http'
+import path from 'node:path' // make absolute path
+import { testPath } from './utils/testPath.js'
+
 
 const PORT=8000
 
+// console.log(import.meta) // relative path - The directory where our current module server.js is executing code.
+// const __dirname = import.meta.dirname
+// console.log('CWD', process.cwd())
+
+
+/*
+Scrimba
+const filePath = '/home/projects/s0fcj7p84c/public/index.html'
+
+Mac
+const filePath = '/Users/thomas/docs/projects/s0fcj7p84c/public/index.html'
+
+Windows
+const filePath = '\Users\thomas\docs\projects\s0fcj7p84c\public\index.html'
+*/
+
+const __dirname = import.meta.dirname
+
 const server = http.createServer((req, res) =>{
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Allow-Methods', 'GET')
+
+    // res.setHeader('Access-Control-Allow-Origin', '*')
+    // res.setHeader('Access-Control-Allow-Methods', 'GET')
     // //Set the status code 200 OK
     // res.statusCode = 200
     // //Set the content type to "text/html"
     // res.setHeader('Content-Type', 'text/html')
-    res.writeHead(200, {'Content-Type', 'text/html'})
+    // res.writeHead(200, {'Content-Type': 'text/html'})
     //send the HTML response
-    res.end(`<html><h1>The server is working</h1></html>`)
+    // res.end(`<html><h1>The server is working</h1></html>`)
+
+    const absPathToResource = path.join(__dirname,'public','index.html')
+    const relPathToResource = path.join('public','index.html')
+
+    //Prefer absolute path for stability
+    console.log('absolute: ',absPathToResource) // The path to our resource - absolute path
+    console.log('relative: ',relPathToResource)
+    testPath(__dirname)
+
+    res.statusCode = 200
+    res.setHeader('Content-Type','text/html')
+    res.end()
 })
 
 
