@@ -12,3 +12,11 @@ use it to set the status code and headers such as content type
 
 3) We need to be OS agnostic!
 
+4) File System (FS) module
+FS module uses:
+    - Read files - .readFile()
+    - Create files - .writeFile()
+    - Update files - .appendFile()
+    - Delete files - .unlink()
+    - Rename files - .rename()
+    
