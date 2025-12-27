@@ -27,6 +27,7 @@ Challenge 2:
 import http from 'node:http'
 import path from 'node:path' // make absolute path
 import { testPath } from './utils/testPath.js'
+import { serveStatic } from './utils/serveStatic.js'
 
 
 const PORT=8000
@@ -47,9 +48,21 @@ Windows
 const filePath = '\Users\thomas\docs\projects\s0fcj7p84c\public\index.html'
 */
 
+/*
+Challenge 3:
+
+1. Get the name of the directory holding this server.js file and store it to a const ‘__dirname’.
+*/
+
 const __dirname = import.meta.dirname
 
 const server = http.createServer((req, res) =>{
+    /*
+    Challenge 5:
+
+    1. Import and call serveStatic and pass it the directory of this current module.
+    */
+    serveStatic(__dirname)
 
     // res.setHeader('Access-Control-Allow-Origin', '*')
     // res.setHeader('Access-Control-Allow-Methods', 'GET')
