@@ -63,7 +63,7 @@ const server = http.createServer(async (req, res) => {
 
     1. Import and call serveStatic and pass it the directory of this current module.
     */
-    serveStatic(__dirname)
+    await serveStatic(__dirname)
 
     // res.setHeader('Access-Control-Allow-Origin', '*')
     // res.setHeader('Access-Control-Allow-Methods', 'GET')
@@ -75,22 +75,22 @@ const server = http.createServer(async (req, res) => {
     //send the HTML response
     // res.end(`<html><h1>The server is working</h1></html>`)
 
-    const absPathToResource = path.join(__dirname, 'public', 'index.html')
-    const relPathToResource = path.join('public', 'index.html')
+    // const absPathToResource = path.join(__dirname, 'public', 'index.html')
+    // const relPathToResource = path.join('public', 'index.html')
 
     //const content = fs.readFileSync(absPathToResource, 'utf8')  //unless you actually want synchronous code, you would avoid read file sync
 
-    const content = await fs.readFile(absPathToResource,'utf8')
+    // const content = await fs.readFile(absPathToResource,'utf8')
 
     //Prefer absolute path for stability
-    console.log('absolute: ', absPathToResource) // The path to our resource - absolute path and go for an async option
-    console.log('relative: ', relPathToResource)
-    testPath(__dirname)
+    // console.log('absolute: ', absPathToResource) // The path to our resource - absolute path and go for an async option
+    // console.log('relative: ', relPathToResource)
+    // testPath(__dirname)
 
-    res.statusCode = 200
-    res.setHeader('Content-Type', 'text/html')
-    res.end(content)
-
+    // res.statusCode = 200
+    // res.setHeader('Content-Type', 'text/html')
+    // res.end(content)
+    await serveStatic(req,res, __dirname)
 
 
 })

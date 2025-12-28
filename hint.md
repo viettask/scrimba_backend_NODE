@@ -19,4 +19,7 @@ FS module uses:
     - Update files - .appendFile()
     - Delete files - .unlink()
     - Rename files - .rename()
-    
+
+5) Global variables in Node.js (past and present)
+
+
