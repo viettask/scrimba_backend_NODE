@@ -11,7 +11,7 @@ Challenge 4:
 */
 import path from 'node:path'
 import fs from 'node:fs/promises'
-import { sendResponse } from './sendResponse'
+import { sendResponse } from './sendResponse.js'
 
 /*
 Challenge 1: 
@@ -22,15 +22,33 @@ Challenge 1:
 - You will need to change something to do with the function declaration. What is it?
 */
 
-export async function serveStatic(baseDir) {
-  const filePath = path.join(baseDir, 'public','index.htlm')
+export async function serveStatic(baseDir, res, requestedPath) {
+  const fileName = requestedPath || 'index.html'
+  const filePath = path.join(baseDir, 'public',fileName)
   try{
     const content = await fs.readFile(filePath)
-    sendResponse(res, 200,'text/html', content)
+     // Determine content type based on file extension
+    const ext = path.extname(filePath).toLowerCase()
+    const contentTypes = {
+      '.html': 'text/html',
+      '.css': 'text/css',
+      '.js': 'text/javascript',
+      '.json': 'application/json',
+      '.png': 'image/png',
+      '.jpg': 'image/jpeg',
+      '.jpeg': 'image/jpeg',
+      '.gif': 'image/gif',
+      '.svg': 'image/svg+xml',
+      '.ico': 'image/x-icon'
+    }
+    
+    const contentType = contentTypes[ext] || 'application/octet-stream'
+    sendResponse(res, 200,contentType, content)
   }
   catch(err)
   {
     console.log(err)
+    sendResponse(res, 404, 'text/html', '<h1>404 Not Found</h1>')
   }
 }
 

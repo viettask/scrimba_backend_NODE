@@ -63,7 +63,7 @@ const server = http.createServer(async (req, res) => {
 
     1. Import and call serveStatic and pass it the directory of this current module.
     */
-    await serveStatic(__dirname)
+    //await serveStatic(__dirname)
 
     // res.setHeader('Access-Control-Allow-Origin', '*')
     // res.setHeader('Access-Control-Allow-Methods', 'GET')
@@ -90,7 +90,20 @@ const server = http.createServer(async (req, res) => {
     // res.statusCode = 200
     // res.setHeader('Content-Type', 'text/html')
     // res.end(content)
-    await serveStatic(req,res, __dirname)
+    // const publicDir = path.join(__dirname,'public')
+    // const pathToResource = path.join(
+    //     publicDir,
+    //     req.url === '/'?'index.html':req.url
+    // )
+    
+    // await serveStatic(req,res, pathToResource)
+    // Get the requested file path (remove leading slash)
+    const requestedPath = req.url === '/' ? 'index.html' : req.url.slice(1)
+    
+    console.log('Requested:', requestedPath) // Debug log
+    
+    // Serve the requested file
+    await serveStatic(__dirname, res, requestedPath)
 
 
 })
